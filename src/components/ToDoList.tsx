@@ -26,10 +26,7 @@ export const ToDoList = (props: ToDoListPropsType) => {
     };
 
     const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter') {
-            props.addTask(newTaskTitle);
-            setNewTaskTitle('');
-        }
+        if (e.key === 'Enter' && newTaskTitle) { addTask() }
     }
 
     const addTask = () => {
@@ -45,7 +42,8 @@ export const ToDoList = (props: ToDoListPropsType) => {
         <div>
             <h3>{props.title}</h3>
             <div>
-                <input value={newTaskTitle}
+                <input 
+                    value={newTaskTitle} 
                     onChange={onNewTitleChangeHandler}
                     onKeyDown={onKeyDownHandler}
                 />
