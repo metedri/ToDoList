@@ -49,7 +49,7 @@ function App() {
         <div className="App">
             <ToDoList title="What to learn"
                 tasks={tasksForTodolist}
-                date='11/08/2024' removeTask={removeTask}
+                removeTask={removeTask}
                 changeFilter={changeFilter}
                 addTask={addTask}
                 changeTaskStatus={changeTaskStatus}

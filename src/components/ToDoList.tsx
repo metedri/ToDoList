@@ -5,7 +5,6 @@ import { ChangeEvent, useState, KeyboardEvent } from "react"
 type ToDoListPropsType = {
     title: string
     tasks: TasksType[]
-    date?: string
     removeTask: (id: string) => void
     changeFilter: (filter: FilterValues) => void
     addTask: (title: string) => void
@@ -26,17 +25,17 @@ export const ToDoList = (props: ToDoListPropsType) => {
     };
 
     const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter' && newTaskTitle) { addTask() }
+        if (e.key === 'Enter') { addTaskHandler() }
     }
 
-    const addTask = () => {
+    const addTaskHandler = () => {
+        if ( newTaskTitle) {
         props.addTask(newTaskTitle);
-        setNewTaskTitle('');
-    }
+        setNewTaskTitle(''); 
+    }}
 
-    const onAllClickHandler = () => props.changeFilter('all');
-    const onActiveClickHandler = () => props.changeFilter('active');
-    const onCompletedClickHandler = () => props.changeFilter('completed');
+    const setFilterHandlerCreator = (filterValue: FilterValues) =>  () => props.changeFilter(filterValue);
+    
 
     return (
         <div>
@@ -47,7 +46,7 @@ export const ToDoList = (props: ToDoListPropsType) => {
                     onChange={onNewTitleChangeHandler}
                     onKeyDown={onKeyDownHandler}
                 />
-                <Button title={'+'} onClick={addTask} />
+                <Button title={'+'} onClick={addTaskHandler} />
             </div>
             {props.tasks.length === 0 ? (
                 <p>Задач нет</p>
@@ -72,11 +71,10 @@ export const ToDoList = (props: ToDoListPropsType) => {
                 </ul>
             )}
             <div>
-                <Button title={'All'} onClick={onAllClickHandler} />
-                <Button title={'Active'} onClick={onActiveClickHandler} />
-                <Button title={'Completed'} onClick={onCompletedClickHandler} />
+                <Button title={'All'} onClick={setFilterHandlerCreator('all')} />
+                <Button title={'Active'} onClick={setFilterHandlerCreator('active')} />
+                <Button title={'Completed'} onClick={setFilterHandlerCreator('completed')} />
             </div>
-            <div>{props.date}</div>
         </div>
     )
 }
