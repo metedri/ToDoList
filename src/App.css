@@ -48,3 +48,20 @@ input {
   padding: 5px;
 }
 
+.error {
+  border: 1px solid red;
+}
+
+.error-message {
+  color: red;
+}
+
+.active-filter {
+  background-color: white;
+  color: #cc00b1;
+}
+
+.is-done {
+  opacity: 0.5;
+}
+
