@@ -79,9 +79,9 @@ export const ToDoList = (props: ToDoListPropsType) => {
                 </ul>
             )}
             <div>
-                <Button activeFilter={filter === 'all'} title={'All'} onClick={setFilterHandlerCreator('all')} />
-                <Button activeFilter={filter === 'active'} title={'Active'} onClick={setFilterHandlerCreator('active')} />
-                <Button activeFilter={filter === 'completed'} title={'Completed'} onClick={setFilterHandlerCreator('completed')} />
+                <Button classes={`${filter === 'all' ? 'active-filter': ''}`} title={'All'} onClick={setFilterHandlerCreator('all')} />
+                <Button classes={`${filter === 'active' ? 'active-filter': ''}`} title={'Active'} onClick={setFilterHandlerCreator('active')} />
+                <Button classes={`${filter === 'completed' ? 'active-filter': ''}`} title={'Completed'} onClick={setFilterHandlerCreator('completed')} />
             </div>
         </div>
     )

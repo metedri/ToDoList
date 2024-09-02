@@ -25,12 +25,7 @@ function App() {
         setTasks(newTasks);
     };
 
-    const changeTaskStatus = (id: string, isDone: boolean) => {
-        const updatedTasks = tasks.map(t =>
-            t.id === id ? { ...t, isDone } : t
-        );
-        setTasks(updatedTasks);
-    };
+    const changeTaskStatus = (id: string, isDone: boolean) => setTasks(tasks.map(t => t.id === id ? { ...t, isDone } : t));
 
     const [filter, setFilter] = useState<FilterValues>('all');
 

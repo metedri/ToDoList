@@ -1,13 +1,12 @@
 import { ButtonHTMLAttributes } from "react"
 
 type Props = {
-    activeFilter?: boolean
+    classes?: string
 } & ButtonHTMLAttributes<HTMLButtonElement>
 
-export const Button = ({title, onClick, activeFilter}: Props) => {
-    const finalClassName = `${activeFilter ? 'active-filter': ''}`
+export const Button = ({title, onClick, classes}: Props) => {
 
     return (
-        <button className={finalClassName} onClick={onClick}>{title}</button>
+        <button className={classes} onClick={onClick}>{title}</button>
     )
 }
