@@ -34,12 +34,8 @@ export const ToDoList = (props: ToDoListPropsType) => {
     }
 
     const addTaskHandler = () => {
-        if ( newTaskTitle.trim() && newTaskTitle !== 'kakashka') {
-        addTask(newTaskTitle);
+        newTaskTitle.trim() && newTaskTitle !== 'kakashka' ? addTask(newTaskTitle) : setError('Title is required');
         setNewTaskTitle(''); 
-        } else {
-            setError('Title is required')
-        }
     }
 
     const setFilterHandlerCreator = (filterValue: FilterValues) =>  () => changeFilter(filterValue);
