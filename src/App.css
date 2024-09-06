@@ -1,11 +1,15 @@
-.App {
+.App{
+  padding: 10px;
+}
+
+.ToDoLists {
   padding: 30px;
   display: flex;
 
   color: #505050;
 }
 
-.App > div {
+.ToDoLists > div {
   margin-right: 50px;
   padding: 20px;
   background-color: #ffb1f55e;
@@ -13,7 +17,7 @@
   border-radius: 10px;
 }
 
-.App > div > h3 {
+.ToDoLists > div > h3 {
   text-align: center;
 }
 

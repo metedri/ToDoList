@@ -4,9 +4,9 @@ type Props = {
     classes?: string
 } & ButtonHTMLAttributes<HTMLButtonElement>
 
-export const Button = ({title, onClick, classes}: Props) => {
+export const Button = ({children, onClick, classes}: Props) => {
 
     return (
-        <button className={classes} onClick={onClick}>{title}</button>
+        <button className={classes} onClick={onClick}>{children}</button>
     )
 }
