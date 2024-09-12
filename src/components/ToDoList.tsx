@@ -1,8 +1,12 @@
 import { FilterValues } from "../App"
 import { AddItemForm } from "./AddItemForm"
-import { Button } from "./Button"
 import { ChangeEvent } from "react"
 import { EditableSpan } from "./EditableSpan"
+import IconButton from "@mui/material/IconButton"
+import DeleteIcon from '@mui/icons-material/Delete';
+import Button from "@mui/material/Button"
+import Checkbox from "@mui/material/Checkbox"
+
 
 type Props = {
     listID: string
@@ -54,7 +58,7 @@ export const ToDoList = (props: Props) => {
     }
 
     const tasksComponents = tasks.length === 0 ? (<p>Задач нет</p>) : (
-        <ul>
+        <ul style={{padding: '0'}}>
             {tasks.map(t => {
                 const onRemoveHandler = () => removeTask(t.id, listID)
                 const changeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -65,12 +69,15 @@ export const ToDoList = (props: Props) => {
                     changeTaskTitle(newTaskTitle, listID, t.id)
                 }
             
-                return <li key={t.id} className={t.isDone ? 'is-done' : ''}>
+                return <li key={t.id} className={t.isDone ? 'is-done' : ''} style={{listStyle: 'none', display: 'flex', justifyContent: 'space-between'}}>
                     <div>
-                        <input type="checkbox" checked={t.isDone} onChange={changeTaskStatusHandler} />
+                        <Checkbox checked={t.isDone} onChange={changeTaskStatusHandler} />
                         <EditableSpan title={t.title} changeTitle={changeTitleHandler}/>
                     </div>
-                    <Button onClick={onRemoveHandler}>x</Button>
+                    <IconButton onClick={onRemoveHandler} size={'small'} >
+                        <DeleteIcon />
+                    </IconButton>
+
                 </li>
             })}
         </ul>
@@ -80,14 +87,16 @@ export const ToDoList = (props: Props) => {
         <div>
             <div className='todolisttitle'>
                 <h3><EditableSpan title={title} changeTitle={changeListTitleHandler}/></h3>
-                <Button onClick={removeToDoListHandler}>x</Button>
+                <IconButton onClick={removeToDoListHandler} size={'small'}>
+                    <DeleteIcon />
+                </IconButton>
             </div>
             <AddItemForm addItem={addTaskHandler} />
             {tasksComponents}
             <div>
-                <Button classes={`${filter === 'all' ? 'active-filter' : ''}`} onClick={setFilterHandlerCreator('all', listID)}>All</Button>
-                <Button classes={`${filter === 'active' ? 'active-filter' : ''}`} onClick={setFilterHandlerCreator('active', listID)}>Active</Button>
-                <Button classes={`${filter === 'completed' ? 'active-filter' : ''}`} onClick={setFilterHandlerCreator('completed', listID)}>Completed</Button>
+                <Button onClick={setFilterHandlerCreator('all', listID)} size={'small'} variant={filter === 'all' ? 'outlined' : 'text'}>All</Button>
+                <Button onClick={setFilterHandlerCreator('active', listID)} size={'small'} variant={filter === 'active' ? 'outlined' : 'text'}>Active</Button>
+                <Button onClick={setFilterHandlerCreator('completed', listID)} size={'small'} variant={filter === 'completed' ? 'outlined' : 'text'}>Completed</Button>
             </div>
         </div>
     )

@@ -6,6 +6,7 @@
 .pnp.js
 
 /src/components/ToDoList_useRef.tsx
+/src/components/Button.tsx
 
 # testing
 /coverage
