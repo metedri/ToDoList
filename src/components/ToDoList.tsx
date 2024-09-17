@@ -1,11 +1,13 @@
 import { FilterValues } from "../App"
 import { AddItemForm } from "./AddItemForm"
-import { ChangeEvent } from "react"
+import { ChangeEvent, useState } from "react"
 import { EditableSpan } from "./EditableSpan"
 import IconButton from "@mui/material/IconButton"
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from "@mui/material/Button"
 import Checkbox from "@mui/material/Checkbox"
+import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
+import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';
 
 
 type Props = {
@@ -43,6 +45,9 @@ export const ToDoList = (props: Props) => {
         changeListTitle
     } = props
 
+    const [collapsed, setCollapsed] = useState(false)
+
+
     const addTaskHandler = (newTaskTitle: string) => {
         addTask(newTaskTitle, listID)
     }
@@ -58,7 +63,7 @@ export const ToDoList = (props: Props) => {
     }
 
     const tasksComponents = tasks.length === 0 ? (<p>Задач нет</p>) : (
-        <ul style={{padding: '0'}}>
+        <ul style={{ padding: '0' }}>
             {tasks.map(t => {
                 const onRemoveHandler = () => removeTask(t.id, listID)
                 const changeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -68,11 +73,11 @@ export const ToDoList = (props: Props) => {
                 const changeTitleHandler = (newTaskTitle: string) => {
                     changeTaskTitle(newTaskTitle, listID, t.id)
                 }
-            
-                return <li key={t.id} className={t.isDone ? 'is-done' : ''} style={{listStyle: 'none', display: 'flex', justifyContent: 'space-between'}}>
+
+                return <li key={t.id} className={t.isDone ? 'is-done' : ''} style={{ listStyle: 'none', display: 'flex', justifyContent: 'space-between' }}>
                     <div>
                         <Checkbox checked={t.isDone} onChange={changeTaskStatusHandler} />
-                        <EditableSpan title={t.title} changeTitle={changeTitleHandler}/>
+                        <EditableSpan title={t.title} changeTitle={changeTitleHandler} />
                     </div>
                     <IconButton onClick={onRemoveHandler} size={'small'} >
                         <DeleteIcon />
@@ -86,18 +91,27 @@ export const ToDoList = (props: Props) => {
     return (
         <div>
             <div className='todolisttitle'>
-                <h3><EditableSpan title={title} changeTitle={changeListTitleHandler}/></h3>
-                <IconButton onClick={removeToDoListHandler} size={'small'}>
-                    <DeleteIcon />
-                </IconButton>
+                <h3><EditableSpan title={title} changeTitle={changeListTitleHandler} /></h3>
+                <div>
+                    <IconButton onClick={() => setCollapsed(!collapsed)} size={'small'}>
+                        {collapsed ? <KeyboardDoubleArrowUpIcon /> : <KeyboardDoubleArrowDownIcon />}
+                    </IconButton>
+                    <IconButton onClick={removeToDoListHandler} size={'small'}>
+                        <DeleteIcon />
+                    </IconButton>
+                </div>
             </div>
-            <AddItemForm addItem={addTaskHandler} />
-            {tasksComponents}
-            <div>
-                <Button onClick={setFilterHandlerCreator('all', listID)} size={'small'} variant={filter === 'all' ? 'outlined' : 'text'}>All</Button>
-                <Button onClick={setFilterHandlerCreator('active', listID)} size={'small'} variant={filter === 'active' ? 'outlined' : 'text'}>Active</Button>
-                <Button onClick={setFilterHandlerCreator('completed', listID)} size={'small'} variant={filter === 'completed' ? 'outlined' : 'text'}>Completed</Button>
-            </div>
-        </div>
+
+            {collapsed &&
+                <div>
+                    <AddItemForm addItem={addTaskHandler} />
+                    {tasksComponents}
+                    <div>
+                        <Button onClick={setFilterHandlerCreator('all', listID)} size={'small'} variant={filter === 'all' ? 'outlined' : 'text'}>All</Button>
+                        <Button onClick={setFilterHandlerCreator('active', listID)} size={'small'} variant={filter === 'active' ? 'outlined' : 'text'}>Active</Button>
+                        <Button onClick={setFilterHandlerCreator('completed', listID)} size={'small'} variant={filter === 'completed' ? 'outlined' : 'text'}>Completed</Button>
+                    </div>
+                </div>
+            }</div>
     )
 }

@@ -1,7 +1,7 @@
 import { ChangeEvent, useState, KeyboardEvent } from "react"
 import TextField from '@mui/material/TextField';
 import IconButton from "@mui/material/IconButton";
-import AddIcon from '@mui/icons-material/Add';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 type Props ={
     addItem: (newTitle: string) => void
@@ -36,8 +36,8 @@ export const AddItemForm = ({addItem}: Props) => {
                     size={'small'}
                     label={'Type value'}
                 />
-                <IconButton onClick={() => addHandler(newTitle)} size={'small'} color={'primary'} >
-                        <AddIcon />
+                <IconButton onClick={() => addHandler(newTitle)} size={'small'} color={'primary'}  >
+                        <AddCircleOutlineIcon color={'primary'}/>
                     </IconButton>
             </div>
     )
