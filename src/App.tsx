@@ -14,13 +14,13 @@ import Grid from '@mui/material/Grid2';
 import Paper from '@mui/material/Paper';
 
 export type FilterValues = 'all' | 'active' | 'completed'
-type ToDoLists = {
+export type ToDoLists = {
     id: string
     title: string
     filter: FilterValues
 }
 
-type TasksState = {
+export type TasksState = {
     [key: string]: TasksType[]
 }
 
@@ -122,7 +122,7 @@ function App() {
 
     return (
         <div className="App">
-            <AppBar position="static">
+            <AppBar position="static" sx={{ mb: '30px' }}>
                 <Toolbar>
                     <IconButton
                         size="large"
@@ -137,6 +137,8 @@ function App() {
                         To Do List
                     </Typography>
                     <Button color="inherit">Login</Button>
+                    <Button color="inherit">Logout</Button>
+                    <Button color="inherit">Faq</Button>
                 </Toolbar>
             </AppBar>
             <Container fixed>
