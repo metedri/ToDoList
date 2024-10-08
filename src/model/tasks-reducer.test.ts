@@ -1,6 +1,6 @@
 import { addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer } from './tasks-reducer'
 import { TasksState } from '../App'
-import { addToDoListAC } from './todolists-reducer'
+import { addToDoListAC, removeToDoListAC } from './todolists-reducer'
 
 let startState: TasksState
 
@@ -87,3 +87,16 @@ test('new array should be added when new todolist is added', () => {
   expect(endState[newKey]).toEqual([])
 })
 
+test('property with todolistId should be deleted', () => {
+
+  const action = removeToDoListAC('todolistId2')
+
+  const endState = tasksReducer(startState, action)
+
+  const keys = Object.keys(endState)
+
+  expect(keys.length).toBe(1)
+  expect(endState['todolistId2']).not.toBeDefined()
+  // or
+  expect(endState['todolistId2']).toBeUndefined()
+})
