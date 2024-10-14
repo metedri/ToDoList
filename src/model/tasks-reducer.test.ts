@@ -50,7 +50,7 @@ test('status of specified task should be changed', () => {
   const endState = tasksReducer(
     startState,
     changeTaskStatusAC({
-      taskId: '2',
+      id: '2',
       isDone: false,
       todolistId: 'todolistId2',
     })
@@ -65,7 +65,7 @@ test('title of specified task should be changed', () => {
     startState,
     changeTaskTitleAC({
       title: 'New title',
-      listID: 'todolistId2',
+      todolistId: 'todolistId2',
       id: '1'
     })
   )
