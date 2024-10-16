@@ -7,7 +7,8 @@
 
 /src/components/ToDoList_useRef.tsx
 /src/components/Button.tsx
-/src/App copy.tsx
+/src/AppUseState.tsx
+/src/AppUseReduser.tsx
 
 # testing
 /coverage

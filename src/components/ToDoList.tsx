@@ -1,4 +1,4 @@
-import { FilterValues } from "../App"
+import { FilterValues } from "../app/App"
 import { AddItemForm } from "./AddItemForm"
 import { ChangeEvent, useState } from "react"
 import { EditableSpan } from "./EditableSpan"

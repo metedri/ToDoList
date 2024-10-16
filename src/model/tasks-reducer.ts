@@ -1,6 +1,8 @@
 import { v1 } from 'uuid'
-import { TasksState } from '../App'
+import { TasksState } from '../app/App'
 import { AddTodolistActionType, RemoveTodolistActionType } from './todolists-reducer';
+
+const initialState: TasksState = {}
 
 // Action creators
 export const removeTaskAC = (payload: { id: string; todolistId: string }) => {
@@ -49,7 +51,7 @@ type ActionsType = RemoveTaskActionType
 
 
 
-export const tasksReducer = (state: TasksState, action: ActionsType): TasksState => {
+export const tasksReducer = (state: TasksState = initialState, action: ActionsType): TasksState => {
   switch (action.type) {
     case 'REMOVE_TASK': {
       const { id, todolistId} = action.payload
@@ -68,16 +70,16 @@ export const tasksReducer = (state: TasksState, action: ActionsType): TasksState
       const { title, todolistId, id} = action.payload
       return { ...state, [todolistId]: state[todolistId].map(t => t.id === id ? { ...t, title: title } : t) }
     }
-    case 'ADD-TODOLIST': {
+    case 'ADD_TODOLIST': {
       return { ...state, [action.payload.todolistId]: [] }
     }
-    case 'REMOVE-TODOLIST': {
+    case 'REMOVE_TODOLIST': {
       const stateCopy = {...state}
       delete stateCopy[action.payload.id]
       return stateCopy
     }
     default:
-      throw new Error("I don't understand this type")
+      return state
   }
 }
 
